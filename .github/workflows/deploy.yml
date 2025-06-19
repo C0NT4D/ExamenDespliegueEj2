@@ -48,6 +48,6 @@ jobs:
           username: ${{ secrets.REMOTE_USER }}
           key: ${{ secrets.REMOTE_KEY }}
           script: |
-            cd /ruta/del/proyecto/en/servidor
+            cd /var/www/html/ExamenDespliegueEj2
             docker-compose pull
             docker-compose up -d --remove-orphans
