@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: c0nt4d/sqldiscos:v1
+    container_name: mysql
+    environment:
+      MYSQL_DATABASE: discos
+      MYSQL_ROOT_PASSWORD: discos1234
+      MYSQL_USER: michael
+      MYSQL_PASSWORD: michael1234
+    networks:
+      - discosnet
+    volumes:
+      - mysql_data:/var/lib/mysql
+    restart: unless-stopped
+
+  php:
+    image: c0nt4d/phpdiscos:v1
+    container_name: php
+    depends_on:
+      - mysql
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_DATABASE: discos
+      MYSQL_USER: michael
+      MYSQL_PASSWORD: michael1234
+    ports:
+      - "8080:80"
+    networks:
+      - discosnet
+    restart: unless-stopped
+
+networks:
+  discosnet:
+    driver: bridge
+
+volumes:
+  mysql_data: 
