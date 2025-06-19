@@ -1,5 +1,3 @@
-version: '3.8'
-
 services:
   mysql:
     image: c0nt4d/sqldiscos:v1
